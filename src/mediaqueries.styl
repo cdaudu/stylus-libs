@@ -1,0 +1,18 @@
+$mq = 'screen and '
+$op = '(orientation: portrait)'
+$ol = '(orientation: landscape)'
+// usage : @media $mq-md
+// portrait only
+$mq-op = $mq + $op
+// landscape only
+$mq-ol = $mq + $ol
+// mobile only
+$mq-xs = $mq + '(max-width: ' + ($sm-w - 1) + 'px)'
+// Tablet portait
+$mq-sm = $mq + '(min-width: ' + $sm-w + 'px)'
+// Tablet landscape
+$mq-md = $mq + '(min-width: ' + $md-w + 'px)'
+// Desktop
+$mq-lg = $mq + '(min-width: ' + $lg-w + 'px)'
+// Desktop large
+$mq-xl = $mq + '(min-width: ' + $xl-w + 'px)'

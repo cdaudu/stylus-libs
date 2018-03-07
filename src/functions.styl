@@ -1,0 +1,105 @@
+    
+/* ------------------ Font faces ------------------ */
+/* Function to generate a font face declaration */
+getMyFontFace(font-name)
+  @font-face {
+    font-family: font-name;
+    src: url(pathToFonts + font-name'/'font-name'.eot?#iefix') format('embedded-opentype'),
+      url(pathToFonts + font-name'/'font-name'.woff2') format('woff2'),
+      url(pathToFonts + font-name'/'font-name'.woff') format('woff'),
+      url(pathToFonts + font-name'/'font-name'.ttf') format('truetype'),
+      url(pathToFonts + font-name'/'font-name'.svg') format('svg');
+      font-weight: normal;
+      font-style: normal;
+  }
+
+getAllMyFontFaces(fonts_array)
+  for i in fonts_array
+    getMyFontFace(i)
+  for j in fonts_array
+    .font-family-{j}
+      font-family j, arial, sans-serif
+
+fontSizesClassesGenerator(fontSizes_array)
+  for i in fontSizes_array
+    .font-size-{i}
+      font-size i
+      
+/* Function to generate every font size classes declarations */
+customFontSizesClassesGenerator($first = 0,$last = 1)
+  for $i in ($first..$last)
+    for $j in (0..9)
+      if($i>0 && $j>0)
+        .font-size-{$i}-{$j}
+          font-size $i + ($j /10) em
+      else
+        if($i>0 && $j==0)
+          .font-size-{$i}
+            font-size $i em
+                             
+fontsClassesGenerator(fontProperties_array)
+  for i in fontProperties_array
+    .font-{i[0]}-{i[1]}
+      font-{i[0]} i[1]
+
+/* ------------------------------------------------- */
+
+//= Ellipsis string - mixins to limit the caracters number of a string
+// usage : 
+// .myClass
+//   ellipsis-txt(3)
+ellipsisString(size)
+  text-overflow ellipsis
+  width size
+  white-space nowrap
+  overflow hidden
+
+//= Exllipsis lines - mixins to limit the line number to display on a string
+// usage : 
+// .myClass
+//   ellipsisLines(3)
+ellipsisLines(nb_lines)
+  overflow hidden
+  text-overflow ellipsis
+  display -webkit-box
+  -webkit-box-orient vertical
+  -webkit-line-clamp nb_lines /* number of lines to show */
+  line-height 1em        /* fallback */
+  max-height unit(nb_lines, 'em')       /* fallback */
+  min-height unit(nb_lines, 'em')       /* fallback */
+  
+/* ------------------- Classes generators ---------------------- */
+
+/* Function to generate every color classes declarations */
+colorClassesGenerator(colors_array)
+  for i in colors_array
+    .color-{i[0]}
+      color i[1]
+      a
+        color i[1]
+/* Function to generate every color classes declarations */
+backgroundColorClassesGenerator(colors_array)
+  for i in colors_array
+    .background-color-{i[0]}
+      background-color i[1]
+             
+/* Function to generate every display classes declarations */
+displayClassesGenerator(displays_array)
+  for i in displays_array
+    .display-{i}
+      display i
+
+/* Function to generate grid classes */
+generateCols($type = '', $nb_columns = 12)
+  if $type
+    .{$type}-col-hide
+      display none !important
+    .{$type}-col-show
+      display inherit !important
+  for $i in 1..12
+    if $type
+      .{$type}-cols-{$i}-{$nb_columns}
+        width unit(($i/$nb_columns)*100, '%') !important
+    else
+      .cols-{$i}-{$nb_columns}
+        width unit(($i/$nb_columns)*100, '%') !important

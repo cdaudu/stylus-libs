@@ -1,0 +1,35 @@
+/* Fix the color of autofill fields for chrome */
+/* usage :
+input
+  +autofill()
+    background-color #F60
+*/
+autofill()
+  input:-webkit-autofill
+    {block}
+  input::-webkit-autofill:focus
+    {block}
+  :focus
+    {block}
+  input::focus:-webkit-autofill
+    {block}
+  input:-webkit-autofill:focus
+    {block}
+  input:focus:-webkit-autofill
+    {block}
+
+/* mixin to change the placeholder properties */
+/* usage :
+input
+  +placeholder()
+    color #F60
+*/
+placeholder()
+  &::-webkit-input-placeholder
+    {block}
+  &:-moz-placeholder
+    {block}
+  &::-moz-placeholder
+    {block}
+  &:-ms-input-placeholder
+    {block}

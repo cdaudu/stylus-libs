@@ -1,0 +1,61 @@
+@import 'vars'
+@import 'functions'
+@import 'mixins'
+@import 'mediaqueries'
+//= Add a before element after the <body> tag to verify the media query rule
+.debug
+  body
+    &:after,
+    &:before
+      background-color rgba(0,0,0,0.5)
+      color #FFF
+      position fixed
+    &:before
+      right 0
+      top 0
+    &:after
+      bottom 0
+      right 0
+
+debugContent(text, before = true)
+  .debug
+    body
+      if before
+        &:before
+          content text
+      else
+        &:after
+          content text
+
+@media $mq-op
+  debugContent('portrait', false)
+@media $mq-ol
+  .debug
+    body
+      &:after
+        content 'landscape'
+@media $mq-xs
+  .debug
+    body
+      &:before
+        content 'mobile (xs)'
+@media $mq-sm
+  .debug
+    body
+      &:before
+        content 'mobile (sm)'
+@media $mq-md
+  .debug
+    body
+      &:before
+        content 'tablet (md)'
+@media $mq-lg
+  .debug
+    body
+      &:before
+        content 'desktop (lg)'
+@media $mq-xl
+  .debug
+    body
+      &:before
+        content 'desktop (xl)'
